@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+#gameboarddiv {
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#gamestatus {
+    font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 6px;
+    margin: 0 auto;
+    /* width and height are each (3*120) + (2*6) = 372 px */
+    width: 372px;
+    height: 372px;
+}
+
+.cell {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid rgb(171, 171, 171);
+}
+
+.cell:hover {
+    background-color: rgb(213, 213, 213);    
+}
+
+.cell.x {
+    color: red;
+}
+
+.cell.o {
+    color:blue
+}
+
+.controlboard {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+    width: 372px;
+    max-width: 372px;
+    height: 120px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+}
+
+.playermode {
+    padding: 20px;
+    background-color: oldlace;
+}
+
+.selectionbtn {
+    padding: 10px 20px;
+    border-style: none;
+    box-shadow: 0px 3px 2px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background-color:gold;
+    margin-left:3px;
+    margin-right:3px;
+}
+
+.symbolchoice {
+    display: none;
+    padding: 20px;
+    background-color: rgb(255, 254, 214);
+}
+
+.gameend {
+    display: none;
+    padding: 20px;
+    background-color: rgb(255, 254, 183);
+}
+
