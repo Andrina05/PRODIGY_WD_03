@@ -1,10 +1,11 @@
+// The viewing mode selection is saved in the browser.
 if (localStorage.getItem('dark-mode') === 'enabled') {
     document.body.classList.add('dark-mode');
 }
 const darkModeBtn = document.getElementById('darkmodetoggle');
 darkModeBtn.addEventListener("click", () => {
     document.body.classList.toggle('dark-mode');
-    // set a key-value pair in the local storage as dark-mode: enabled (or disabled)
+    // Set a key-value pair in the local storage i.e. the browser as dark-mode: 'enabled' (or disabled)
     localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled')
 });
 
@@ -46,7 +47,7 @@ function showSymbolChoice() {
 }
 
 // Obtain chosen symbol
-controlbox.addEventListener("click", function (e) {
+controlbox.addEventListener("click", (e) => {
     if (e.target.classList.contains("selectionbtn") && e.target.hasAttribute("player-symbol")) {
         const symbol = e.target.getAttribute("player-symbol");
         player1Symbol = symbol;
@@ -71,7 +72,7 @@ function startGame() {
     updateStatus();
 
     if (isVsComputer && currentPlayer === player2Symbol) {
-        setTimeout(computerMove, 1000); // AI only moves after 1s
+        setTimeout(computerMove, 1500); // AI only moves after 1s
     }
 }
 
@@ -144,12 +145,13 @@ function computerMove() {
     or the center, if no win conditions are detected. Once the center is filled,
     the corners are considered.
     */
-    const boardCorners = [2, 4, 6, 8];
+    const boardCorners = [0, 2, 6, 8];
     let blankCorners = boardCorners.filter(i => gameState[i] == '');
     let centerAvail = (gameState[4] === '');
-    let choice = Math.random();
 
     if (centerAvail) {
+        let choice = Math.random();
+        console.log(choice);
         if (choice <= 0.5 && blankCorners.length > 0) {
             const cornerMoveIndex = blankCorners[Math.floor(Math.random() * blankCorners.length)];
             makeMove(cornerMoveIndex);
