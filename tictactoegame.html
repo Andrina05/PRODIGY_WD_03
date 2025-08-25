@@ -15,6 +15,7 @@
             <div id="gamestatus">Beginning game</div>
 
             <div class="gameboard">
+                <div class="cell" cell-index="0"></div>
                 <div class="cell" cell-index="1"></div>
                 <div class="cell" cell-index="2"></div>
                 <div class="cell" cell-index="3"></div>
@@ -23,25 +24,25 @@
                 <div class="cell" cell-index="6"></div>
                 <div class="cell" cell-index="7"></div>
                 <div class="cell" cell-index="8"></div>
-                <div class="cell" cell-index="9"></div>
             </div>
 
-            <div class="controlboard playermode">
+            <div id="controlboard" class="playermode">
                 <span class="ctrltxt">Choose game-mode:</span><br>
-                <button class="selectionbtn">1-Player</button>
-                <button class="selectionbtn">2-Player</button>
+                <button id="mode1" class="selectionbtn" mode="1">1-Player</button>
+                <button id="mode2" class="selectionbtn" mode="2">2-Player</button>
             </div>
 
-            <div class="controlboard symbolchoice">
+            <!-- <div class="controlboard symbolchoice">
                 <span class="ctrltxt">Player 1 symbol:</span><br>
-                <button class="selectionbtn">X</button>
-                <button class="selectionbtn">O</button>
+                <button class="selectionbtn xbtn" player-symbol="x">X</button>
+                <button class="selectionbtn obtn" player-symbol="o">O</button>
             </div>
 
             <div class="controlboard gameend">
-                <button class="selectionbtn">Play Again</button>
-            </div>
+                <span class="ctrltxt">Good Game!</span><br>
+                <button class="selectionbtn" id="reset-button">Play Again</button>
+            </div> -->
         </div>
-
+        <script src="gameplay.js"></script>
     </body>
 </html>
