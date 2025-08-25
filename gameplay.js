@@ -103,16 +103,55 @@ function makeMove(index) {
 function computerMove() {
     if (!gameActive) return;
 
+    // Check the board and find a possible win
+    for (let i=0;i<9;i++) {
+        if (gameState[i] == '') {
+            gameState[i] = currentPlayer;
+            if(checkForWinner(gameState, currentPlayer)) {
+                gameState[i] = '' // remove data from gameState array
+                makeMove(i);
+                return;
+            }
+            gameState[i] = ''   // Even if a win condition wasn't detected, clear the gameState array.
+        }
+    }
+
+    // If the human player is about to win, block it
+    const plOne = player1Symbol;
+    for (let i=0;i<9;i++) {
+        if (gameState[i] == '') {
+            gameState[i] = plOne;
+            if(checkForWinner(gameState, plOne)) {
+                gameState[i] = '';
+                makeMove(i);
+                return;
+            }
+            gameState[i] = '';
+        } 
+    }
+
     // Check gameState array for all its values (x or o) and their respective indices; find which indices contain empty values
-    let emptyIndices = gameState
+    const emptyIndices = gameState
         .map((val, idx) => val === '' ? idx : null) // if value is blank, enter its index, otherwise enter 'null'
         .filter(idx => idx !== null);               // only return the values whose indices are not null from map()
 
-    if (emptyIndices.length === 0) return;      // stop if all cells are filled
-
+    if (emptyIndices.length === 0) return;          // stop if all cells are filled
     let randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
     makeMove(randomIndex);
+    /*
+    Eg. if random number is 0.5 and there are 3 indices in emptyIndices, result is 0.5 * 3 = 1.5.
+    Applying Math.floor() gives the integer result 1.
+    */
 }
+
+let checkForWinner = (playState, player) => {
+    return winningConditions.some(condition => {
+        const [a, b, c] = condition;
+        // Check whether the filled cells for a win condition are of the same player.
+        return playState[a] === player && playState[b] === player && playState[c] === player;
+    });
+}
+
 
 // Check if a player won or the match is a draw
 function checkResult() {
@@ -157,7 +196,7 @@ function updateStatus() {
 
 // Check symbol and accordingly put in the current player
 function getPlayerName(symbol) {
-    if (!isVsComputer && gameActive) {
+    if (!isVsComputer) {
         return (symbol === player1Symbol) ? '1' : '2';
     } else if (isVsComputer && gameActive) {
         return (symbol === player1Symbol) ? 'Your' : 'Computer\'s';
