@@ -99,7 +99,6 @@ function makeMove(index) {
     }
 }
 
-// Basic computer opponent -- can only fill a random empty cell
 function computerMove() {
     if (!gameActive) return;
 
@@ -130,6 +129,34 @@ function computerMove() {
         } 
     }
 
+    /*
+    Initially, the computer randomly decides whether to fill the corners
+    or the center, if no win conditions are detected. Once the center is filled,
+    the corners are considered.
+    */
+    const boardCorners = [2, 4, 6, 8];
+    let blankCorners = boardCorners.filter(i => gameState[i] == '');
+    let centerAvail = (gameState[4] === '');
+    let choice = Math.random();
+
+    if (centerAvail) {
+        if (choice <= 0.5 && blankCorners.length > 0) {
+            const cornerMoveIndex = blankCorners[Math.floor(Math.random() * blankCorners.length)];
+            makeMove(cornerMoveIndex);
+            return;
+        }
+        else if (choice > 0.5) {
+            makeMove(4);
+            return;
+        }
+    }    
+    else if (blankCorners.length > 0) {
+        const cornerMoveIndex = blankCorners[Math.floor(Math.random() * blankCorners.length)];
+        makeMove(cornerMoveIndex);
+        return;
+    }
+
+
     // Check gameState array for all its values (x or o) and their respective indices; find which indices contain empty values
     const emptyIndices = gameState
         .map((val, idx) => val === '' ? idx : null) // if value is blank, enter its index, otherwise enter 'null'
@@ -144,7 +171,7 @@ function computerMove() {
     */
 }
 
-let checkForWinner = (playState, player) => {
+const checkForWinner = (playState, player) => {
     return winningConditions.some(condition => {
         const [a, b, c] = condition;
         // Check whether the filled cells for a win condition are of the same player.
