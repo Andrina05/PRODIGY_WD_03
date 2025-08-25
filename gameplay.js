@@ -1,3 +1,13 @@
+if (localStorage.getItem('dark-mode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+}
+const darkModeBtn = document.getElementById('darkmodetoggle');
+darkModeBtn.addEventListener("click", () => {
+    document.body.classList.toggle('dark-mode');
+    // set a key-value pair in the local storage as dark-mode: enabled (or disabled)
+    localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled')
+});
+
 const cells = document.querySelectorAll('.cell');
 const statusDisplay = document.getElementById('gamestatus');
 const controlbox = document.getElementById("controlboard");
