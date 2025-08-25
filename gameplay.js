@@ -151,10 +151,6 @@ function computerMove() {
 
     if (centerAvail) {
         let choice = Math.random();
-<<<<<<< HEAD
-=======
-        console.log(choice);
->>>>>>> 02a5634422e56454aa859d0ffb92b40991950a70
         if (choice <= 0.5 && blankCorners.length > 0) {
             const cornerMoveIndex = blankCorners[Math.floor(Math.random() * blankCorners.length)];
             makeMove(cornerMoveIndex);
